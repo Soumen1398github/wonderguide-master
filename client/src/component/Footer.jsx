@@ -19,7 +19,7 @@ function Footer() {
                 </span>
               </a>
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                Explore destinations, book  cuyivvcyici, and create unforgettable memories with us.
+                Explore destinations, book tours, and create unforgettable memories with us.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
