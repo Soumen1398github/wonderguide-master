@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { createTour ,getAllTours,deleteTour,getTour, updateTour, updateTourImages } = require("../controllers/tourController");
+const { createTour ,getAllTours,deleteTour,getTour, updateTour, updateTourImages, searchTours } = require("../controllers/tourController");
 
 // Use memory storage for Cloudinary
 const storage = multer.memoryStorage();
@@ -21,6 +21,7 @@ router.delete("/tours/:id", deleteTour);
 router.get("/tours/:id", getTour);
 router.put("/tours/:id",updateTour);
 router.put("/tours/:id/images", cpUpload, updateTourImages);
+router.get("/search", searchTours);
 
 
 module.exports = router;

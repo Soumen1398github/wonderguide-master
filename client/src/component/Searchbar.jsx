@@ -30,10 +30,10 @@ function Searchbar() {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option selected>From Tour Location</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
+                <option value="US">Delhi</option>
+                <option value="CA">Mumbai</option>
+                <option value="FR">Kolkata</option>
+                <option value="DE">Hyderabad</option>
               </select>
         
   
@@ -42,10 +42,10 @@ function Searchbar() {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option selected>To Tour Location</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
+                <option value="US">Manali</option>
+                <option value="CA">Darjeeling</option>
+                <option value="FR">Hyderabad</option>
+                <option value="DE">Assam</option>
               </select>
 
               <button

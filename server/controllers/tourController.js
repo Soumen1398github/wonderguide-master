@@ -144,6 +144,35 @@ const updateTourImages = async (req, res) => {
     res.status(500).json({ message: "Failed to update images", error: err.message });
   }
 };
+// backend
+const searchTours = async (req, res) => {
+  try {
+    const { name, from, to } = req.query; // 👈 frontend sends these
+
+    let filters = {};
+
+    if (name) {
+      filters.tourName = { $regex: name, $options: "i" };
+    }
+
+    if (from) {
+      filters.fromLocation = { $regex: from, $options: "i" };
+    }
+
+    if (to) {
+      filters.toLocation = { $regex: to, $options: "i" };
+    }
+
+    const tours = await Tour.find(filters);
+
+    res.json(tours);
+  } catch (err) {
+    console.error("Search Error:", err);
+    res.status(500).json({ message: "Error searching tours", error: err.message });
+  }
+};
+
+
 
 
 module.exports = {
@@ -153,4 +182,5 @@ module.exports = {
   getTour,
   updateTour,
   updateTourImages,
+  searchTours
 };

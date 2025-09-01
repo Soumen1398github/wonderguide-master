@@ -19,7 +19,7 @@ const Home = () => {
       {/* <NavbarUser/> */}
       {/* <NavbarTourGuide/> */}
       <ImageSlider />
-      <Searchbar/>
+      {/* <Searchbar/> */}
       <ResponsiveCard/>
       <Footer/>
     </div>
