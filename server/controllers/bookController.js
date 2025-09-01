@@ -180,17 +180,77 @@ const verifyPaymentSession = async (req, res) => {
       try {
         await sendEmail(
           user.email,
-          "🎉 Booking Confirmation - WonderGuide",
+          `🎉 Booking Confirmation - ${tour.tourName} | WonderGuide`,
           `
-            <h2>Hello ${user.firstName || "Traveler"}!</h2>
-            <p>Thank you for booking <strong>${tour.tourName}</strong>.</p>
-            <p><strong>Tickets Booked:</strong> ${parsedNumberOfTickets}</p>
-            <p><strong>Total Paid:</strong> ₹${parsedTotalPrice}</p>
-            <p>We hope you have a great experience!</p>
-            <br/>
-            <small>This is an automated confirmation. Do not reply to this email.</small>
-          `
+  <div style="font-family: Arial, sans-serif; max-width: 650px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
+    <!-- Header Image -->
+    <div style="width: 100%; height: auto;">
+      <img src="${
+        tour.image1 ||
+        "https://kstdc.co/wp-content/themes/kstdc/img/banner-offer-inner.jpg"
+      }" 
+           alt="${tour.tourName}" 
+           style="width: 100%; height: 280px; object-fit: cover; display: block;">
+    </div>
+    <!-- Header Text -->
+    <div style="background-color: #1e88e5; padding: 20px; text-align: center; color: #ffffff;">
+      <h1 style="margin: 0; font-size: 28px;">Booking Confirmed! 🎉</h1>
+      <p style="margin: 5px 0 0; font-size: 16px;">Your adventure to <strong>${
+        tour.tourName
+      }</strong> awaits!</p>
+    </div>
+    <!-- Body -->
+    <div style="padding: 25px; color: #333;">
+      <h2 style="margin-top: 0;">Hello ${user.firstName || "Traveler"},</h2>
+      <p>Thank you for booking your trip with <strong>WonderGuide</strong>. We're excited to have you join us for this unforgettable experience!</p>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Tour Name</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;">${
+            tour.tourName
+          }</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Tickets Booked</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;">${parsedNumberOfTickets}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Total Paid</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #ddd;">₹${parsedTotalPrice}</td>
+        </tr>
+        ${
+          parsedMembers.length > 0
+            ? `<tr>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Members</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                  <ul style="margin: 0; padding-left: 18px;">
+                    ${parsedMembers
+                      .map((m) => `<li>${m.name || m}</li>`)
+                      .join("")}
+                  </ul>
+                </td>
+              </tr>`
+            : ""
+        }
+      </table>
+      <p style="margin-top: 20px;">Get ready for an amazing journey! Our team will contact you soon with further details.</p>
+      <div style="margin-top: 25px; text-align: center;">
+        <a href="${
+          process.env.FRONTEND_URL || "https://wonderguider.vercel.app"
+        }" 
+           style="background-color: #1e88e5; color: white; text-decoration: none; padding: 12px 20px; border-radius: 6px; display: inline-block;">
+           View My Booking
+        </a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="background-color: #f5f5f5; padding: 15px; text-align: center; font-size: 12px; color: #888;">
+      <p>WonderGuide &copy; ${new Date().getFullYear()} - Your travel companion</p>
+      <p>This is an automated email. Please do not reply.</p>
+    </div>
+  </div>`
         );
+
         console.log("Booking confirmation email sent to:", user.email);
       } catch (emailErr) {
         console.error("Failed to send email:", emailErr);
